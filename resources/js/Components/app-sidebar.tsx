@@ -1,5 +1,11 @@
 import * as React from "react";
-import { LayoutDashboardIcon } from "lucide-react";
+import {
+    LayoutDashboardIcon,
+    UserRoundSearch,
+    UsersRound,
+    Settings2,
+    Building2,
+} from "lucide-react";
 
 import { NavMain } from "@/Components/nav-main";
 import { NavUser } from "@/Components/nav-user";
@@ -27,90 +33,62 @@ const data = {
             icon: LayoutDashboardIcon,
         },
 
-        // {
-        //     title: "Models",
-        //     url: "#",
-        //     icon: Bot,
-        //     items: [
-        //         {
-        //             title: "Genesis",
-        //             url: "#",
-        //         },
-        //         {
-        //             title: "Explorer",
-        //             url: "#",
-        //         },
-        //         {
-        //             title: "Quantum",
-        //             url: "#",
-        //         },
-        //     ],
-        // },
-        // {
-        //     title: "Documentation",
-        //     url: "#",
-        //     icon: BookOpen,
-        //     items: [
-        //         {
-        //             title: "Introduction",
-        //             url: "#",
-        //         },
-        //         {
-        //             title: "Get Started",
-        //             url: "#",
-        //         },
-        //         {
-        //             title: "Tutorials",
-        //             url: "#",
-        //         },
-        //         {
-        //             title: "Changelog",
-        //             url: "#",
-        //         },
-        //     ],
-        // },
-        // {
-        //     title: "Settings",
-        //     url: "#",
-        //     icon: Settings2,
-        //     items: [
-        //         {
-        //             title: "General",
-        //             url: "#",
-        //         },
-        //         {
-        //             title: "Team",
-        //             url: "#",
-        //         },
-        //         {
-        //             title: "Billing",
-        //             url: "#",
-        //         },
-        //         {
-        //             title: "Limits",
-        //             url: "#",
-        //         },
-        //     ],
-        // },
-    ],
+        {
+            title: "Application tracker",
+            url: "/application",
+            icon: UserRoundSearch,
+        },
 
-    // projects: [
-    //     {
-    //         name: "Design Engineering",
-    //         url: "#",
-    //         icon: Frame,
-    //     },
-    //     {
-    //         name: "Sales & Marketing",
-    //         url: "#",
-    //         icon: PieChart,
-    //     },
-    //     {
-    //         name: "Travel",
-    //         url: "#",
-    //         icon: Map,
-    //     },
-    // ],
+        {
+            title: "People",
+            url: "/people",
+            icon: UsersRound,
+        },
+
+        {
+            title: "Organization",
+            url: "#",
+            icon: Building2,
+            items: [
+                {
+                    title: "Department",
+                    url: "/department",
+                },
+                {
+                    title: "Designation",
+                    url: "/designation",
+                },
+                {
+                    title: "Contract",
+                    url: "#",
+                },
+                {
+                    title: "Company",
+                    url: "#",
+                },
+            ],
+        },
+
+        {
+            title: "Settings",
+            url: "#",
+            icon: Settings2,
+            items: [
+                {
+                    title: "Activity Log",
+                    url: "#",
+                },
+                {
+                    title: "Permission",
+                    url: "#",
+                },
+                {
+                    title: "Role",
+                    url: "#",
+                },
+            ],
+        },
+    ],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {

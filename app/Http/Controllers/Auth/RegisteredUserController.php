@@ -42,16 +42,19 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => ucwords($request->name),
             'email' => $request->email,
+            'status' => '1', // inactive
             'password' => Hash::make($request->password),
         ]);
 
         // Trigger the Registered event
         event(new Registered($user));
 
-        // Log the user in
-        Auth::login($user);
+        // // Log the user in
+        // Auth::login($user);
 
-        // Redirect to the home page
-        return redirect(RouteServiceProvider::HOME);
+        // // Redirect to the home page
+        // return redirect(RouteServiceProvider::HOME);
+        return redirect('/')->with('success', 'Registration successful! Please log in.');
+
     }
 }

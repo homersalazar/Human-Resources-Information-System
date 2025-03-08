@@ -10,8 +10,9 @@
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "noEmit": true,
+        "baseUrl": ".",
         "paths": {
-            "@/*": ["./resources/js/*"],
+            "@/*": ["resources/js/*"],
             "ziggy-js": ["./vendor/tightenco/ziggy"]
         }
     },

@@ -17,6 +17,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->bigInteger('contract_id')->unsigned()->index()->nullable();
+            $table->bigInteger('company_id')->unsigned()->index()->nullable();
+            $table->bigInteger('designation_id')->unsigned()->index()->nullable();
+            $table->bigInteger('organization_id')->unsigned()->index()->nullable();
+            $table->bigInteger('manager')->unsigned()->index()->nullable();
+            $table->smallInteger('status')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

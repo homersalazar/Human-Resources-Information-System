@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Validation\ValidationException;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -30,12 +31,32 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
-
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+    
+        if (!Auth::attempt($credentials)) {
+            throw ValidationException::withMessages([
+                'email' => ('These credentials do not match our records.'),
+            ]);
+        }
+    
+        $user = Auth::user(); // Get authenticated user
+    
+        if($user->status == 1) {
+            Auth::logout();
+            return redirect()->back()->with('error', ('Unable to log in with the given details. Contact the hr for help.'));
+        }else if($user->status == 3 || $user->status == 4) {
+            Auth::logout();
+            return redirect()->back()->with('error', ('Your account has been deactivated.'));
+        }
+    
         $request->session()->regenerate();
-
-        return redirect()->intended(RouteServiceProvider::HOME);
+    
+        return redirect()->intended('/dashboard');
     }
+    
 
     /**
      * Destroy an authenticated session.
