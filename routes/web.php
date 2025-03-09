@@ -58,6 +58,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/designation', [DesignationController::class, 'index'])->name('designation.edit');
+    Route::get('/designation', [DesignationController::class, 'index'])->name('designation.index');
+    Route::post('/designation', [DesignationController::class, 'store'])->name('designation.store');
 });
 require __DIR__.'/auth.php';

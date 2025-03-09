@@ -1,10 +1,17 @@
 import { useState } from "react";
 
-function useForm(initialValues: any, validate: (values: any) => any) {
+type Errors = {
+    [key: string]: string;
+};
+
+function useForm(
+    initialValues: { [key: string]: any },
+    validate: (values: { [key: string]: any }) => { [key: string]: any }
+) {
     const [values, setValues] = useState(initialValues);
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState<Errors>({});
     const [touched, setTouched] = useState({});
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
     // Handle input changes
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +27,7 @@ function useForm(initialValues: any, validate: (values: any) => any) {
             value = e.target.value;
         }
 
-        setValues((prevValues: any) => ({
+        setValues((prevValues) => ({
             ...prevValues,
             [name]: value,
         }));
@@ -39,7 +46,7 @@ function useForm(initialValues: any, validate: (values: any) => any) {
     };
 
     // Handle input blur
-    const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name } = e.target;
         setTouched((prevTouched) => ({
             ...prevTouched,
@@ -62,7 +69,7 @@ function useForm(initialValues: any, validate: (values: any) => any) {
     // Handle form submission
     const handleSubmit = async (
         e: React.FormEvent<HTMLFormElement>,
-        onSubmit: (values: any) => Promise<void>
+        onSubmit: (values: { [key: string]: any }) => Promise<void> | void
     ) => {
         e.preventDefault();
         setIsSubmitting(true);
@@ -113,6 +120,7 @@ function useForm(initialValues: any, validate: (values: any) => any) {
         errors,
         touched,
         isSubmitting,
+        setIsSubmitting,
         handleChange,
         handleBlur,
         handleSubmit,
