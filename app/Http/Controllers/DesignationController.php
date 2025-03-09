@@ -29,7 +29,7 @@ class DesignationController extends Controller
             $query->orderBy($request->sortField, $request->sortOrder);
         }
 
-        $designations = $query->paginate(10);
+        $designations = $query->orderBy('position')->paginate(10);
 
         return Inertia::render('Organization/Designation', [
             'designations' => $designations, // Change 'users' to 'designations'
@@ -52,5 +52,21 @@ class DesignationController extends Controller
         return response()->json(['success' => 'Designation created successfully.']);
 
     }
+
+    public function destroy($id)
+    {
+        $designation = Designation::find($id);
+    
+        if (!$designation) {
+            return response()->json(['error' => 'Designation not found.'], 404);
+        }
+    
+        $designation->delete();
+    
+        return response()->json(['success' => 'Designation deleted successfully.']);
+    }
+    
+
+
 
 }

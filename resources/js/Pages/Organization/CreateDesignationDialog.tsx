@@ -42,16 +42,20 @@ export default function CreateDesignationDialog() {
         await axios
             .post("/designation", values)
             .then((response) => {
+                setIsOpen(false);
+
                 Swal.fire({
                     icon: "success",
                     title: "Success!",
                     text: response.data.success,
                     showConfirmButton: false,
                     timer: 3000,
-                }).then(() => {
-                    resetForm();
-                    setIsOpen(false);
                 });
+
+                setTimeout(() => {
+                    resetForm();
+                    window.location.reload();
+                }, 2000);
             })
             .catch((error) => {
                 Swal.fire({
